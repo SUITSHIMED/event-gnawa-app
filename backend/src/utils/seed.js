@@ -1,4 +1,3 @@
-
 import { Artist, EventInfo } from "../models/index.js";
 import sequelize from "../../config/database.js";
 

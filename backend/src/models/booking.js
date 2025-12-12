@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/database.js";
+import e from "express";
 
 const Booking = sequelize.define("Booking", {
   id: {
@@ -13,7 +14,8 @@ const Booking = sequelize.define("Booking", {
   phone: { type: DataTypes.STRING },
   artist_id: { type: DataTypes.UUID, allowNull: true }, 
   seats: { type: DataTypes.INTEGER, defaultValue: 1 },
-  status: { type: DataTypes.STRING, defaultValue: 'confirmed' }
+  status: { type: DataTypes.STRING, defaultValue: 'confirmed' },
+  event_date: { type: DataTypes.DATE, allowNull: false }
 }, {
   tableName: "bookings",
 });
