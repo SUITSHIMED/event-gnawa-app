@@ -1,9 +1,9 @@
 
 import express from "express";
-import { getArtists } from "../controllers/artistController";
-import { getArtistsById } from "../controllers/artistController";
+import { getArtists, getAllArtists } from "../controllers/artistController.js";
 
-export const router = express.Router();
-router.get ("/" , getArtists);
-router.get("/:id", getArtistsById);
+const router = express.Router();
+router.get("/", getArtists);
+router.get("/:id", getAllArtists);
+
 export default router;

@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import sequelize from "./config/database.js";
 import "./src/models/index.js";
+import { runSeeder } from "./src/utils/seed.js";
+
 
 import artistRoutes from "./src/routes/artistRoutes.js";
 import bookingRoutes from "./src/routes/bookingRoutes.js";
@@ -24,10 +26,10 @@ async function start() {
   
     console.log(" DB connected");
       
-
-
     await sequelize.sync({ alter: true });
     console.log(" Models synced (tables created/updated)");
+
+    await runSeeder();
 
     app.listen(PORT, () => console.log(`Server running on :${PORT}`));
   } catch (err) {

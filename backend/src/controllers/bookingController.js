@@ -1,9 +1,9 @@
-import { UUID } from "sequelize";
-import { Booking } from "../models";
+import { randomUUID } from 'node:crypto';
+import { Booking } from "../models/index.js";
 export const createBooking = async (req , res) => {
     try {
         const { full_name, email, event_date, artist_id, seats, phone }= req.body ;
-        const code = UUID().slice(0,6).toUpperCase();
+        const code = randomUUID().slice(0,6).toUpperCase();
         const newBooking = await Booking.create({
             code, full_name, email, event_date, artist_id, seats, phone
         });
@@ -13,7 +13,7 @@ export const createBooking = async (req , res) => {
         }
 
     };
-    const getBookingByCode = async (req, res )=>{
+    export const getBookingByCode = async (req, res )=>{
         try {
             const booking = await Booking.findOne({
                 where: { code : req.params.code }
