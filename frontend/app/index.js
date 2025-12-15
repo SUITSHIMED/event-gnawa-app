@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, ActivityIndicator, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useEventInfo } from "../src/services/eventService";
 import { useRouter } from "expo-router";
 
@@ -20,7 +20,14 @@ export default function HomeScreen() {
     );
   }
 
-  const event = data && data.length > 0 ? data[0] : null;
+  let event = null;
+  if (data) {
+    if (Array.isArray(data)) {
+      event = data.length > 0 ? data[0] : null;
+    } else if (typeof data === 'object') {
+      event = data;
+    }
+  }
   if (!event) {
     return (
       <View style={styles.center}>
@@ -59,69 +66,105 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  
   container: {
-    padding: 20,
-    backgroundColor: '#fff',
+    flex: 1,
+    backgroundColor: '#121212', 
+  },
+  contentContainer: {
+    paddingHorizontal: 20, 
   },
   center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#121212',
   },
+  spacer: {
+    height: 16, 
+  },
+  
+  
+  banner: {
+    width: '100%',
+    height: 250, 
+    marginBottom: 20, 
+    backgroundColor: '#282828', 
+  },
+
+  
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    fontSize: 32, 
+    fontWeight: '800', 
+    color: '#E0E0E0', 
+    marginBottom: 8,
+  },
+  meta: {
+    fontSize: 14,
+    color: '#BBBBBB', 
+    marginBottom: 16,
+    fontWeight: '600',
   },
   description: {
     fontSize: 16,
-    color: '#555',
+    color: '#CCCCCC', 
+    lineHeight: 24,
     marginBottom: 20,
   },
-  spacer: {
-    height: 15, 
+
+ 
+  buttonPrimary: {
+    marginHorizontal: 20,
+    backgroundColor: '#00BFFF', 
+    paddingVertical: 18,
+    borderRadius: 12,
+    alignItems: 'center',
+    shadowColor: '#00BFFF',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 6,
   },
+  buttonSecondary: {
+    marginHorizontal: 20,
+    backgroundColor: '#FF4500',
+    paddingVertical: 18,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  buttonGhost: {
+    marginHorizontal: 20,
+    borderWidth: 2,
+    borderColor: '#6F42C1', 
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  buttonText: { 
+    color: '#ffffffff', 
+    fontSize: 18,
+    fontWeight: '900' 
+  },
+  buttonTextSecondary: { 
+    color: '#FFFFFF', 
+    fontSize: 18,
+    fontWeight: '700' 
+  },
+  buttonTextGhost: { 
+    color: '#E0E0E0', 
+    fontSize: 18,
+    fontWeight: '700' 
+  },
+  
   errorText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: 'red',
+    color: '#FF6347', 
+    textAlign: 'center',
   },
   errorTextDetail: {
     fontSize: 14,
-    color: '#888',
+    color: '#AAAAAA',
+    textAlign: 'center',
   }
-  ,
-  banner: {
-    width: '100%',
-    height: 180,
-    borderRadius: 10,
-    marginBottom: 12,
-    backgroundColor: '#eee'
-  },
-  meta: {
-    color: '#666',
-    marginBottom: 10
-  },
-  buttonPrimary: {
-    backgroundColor: '#007BFF',
-    paddingVertical: 14,
-    borderRadius: 10,
-    alignItems: 'center'
-  },
-  buttonSecondary: {
-    backgroundColor: '#28a745',
-    paddingVertical: 14,
-    borderRadius: 10,
-    alignItems: 'center'
-  },
-  buttonGhost: {
-    borderWidth: 1,
-    borderColor: '#6f42c1',
-    paddingVertical: 12,
-    borderRadius: 10,
-    alignItems: 'center'
-  },
-  buttonText: { color: '#fff', fontWeight: '600' },
-  buttonTextSecondary: { color: '#fff', fontWeight: '600' },
-  buttonTextGhost: { color: '#6f42c1', fontWeight: '600' }
 });

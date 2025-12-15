@@ -6,13 +6,7 @@ const queryClient = new QueryClient();
 export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack
-        screenOptions={{
-          headerStyle: { backgroundColor: '#f5f5f5' },
-          headerTintColor: '#333',
-          headerBackTitleVisible: false,
-        }}
-      >
+      <Stack>
         <Stack.Screen name="index" options={{ title: 'Gnawa Festival Home' }} />
         <Stack.Screen name="artists" options={{ title: 'Festival Lineup' }} />
         <Stack.Screen name="artist/[id]" options={{ title: 'Artist Details' }} />

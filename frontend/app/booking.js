@@ -1,75 +1,89 @@
-import { 
-  View, Text, TextInput, StyleSheet, ScrollView, 
-  Alert, TouchableOpacity, ActivityIndicator 
-} from 'react-native';
-import { Checkbox } from 'expo-checkbox'; 
-import { useCreateBooking } from '../src/services/bookingService'; 
-import { useQueryClient } from '@tanstack/react-query';
-import { useBookingStore } from '../src/stores/bookingStore';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+import Checkbox from "expo-checkbox";
+import { useQueryClient } from "@tanstack/react-query";
 
-console.log('[store] useBookingStore (imported):', typeof useBookingStore, useBookingStore ? Object.keys(useBookingStore) : useBookingStore);
+import { useCreateBooking } from "../src/services/bookingService";
+import { useBookingStore } from "../src/stores/bookingStore";
 
 export default function BookingScreen() {
   const queryClient = useQueryClient();
-  const createBookingMutation = useCreateBooking();
-  
-  const { fullName, email, seats, terms, setFullName, setEmail, setSeats, setTerms, reset } = useBookingStore();
+  const createBooking = useCreateBooking();
 
-  const validateForm = () => {
+  const {
+    fullName,
+    email,
+    seats,
+    terms,
+    setFullName,
+    setEmail,
+    setSeats,
+    setTerms,
+    reset,
+  } = useBookingStore();
+
+  
+  const isValid = () => {
     if (!fullName || !email || seats < 1 || seats > 10) {
-      Alert.alert("Invalid Input", "Please provide a valid name, email, and between 1-10 seats.");
+      Alert.alert("Invalid form", "Please fill all fields correctly");
       return false;
     }
     if (!terms) {
-      Alert.alert("Agreement Required", "You must agree to the terms and conditions.");
+      Alert.alert("Terms required", "Please accept terms and conditions");
       return false;
     }
     return true;
   };
 
-  const handleSubmit = () => {
-    if (!validateForm()) return;
+  const handleBooking = () => {
+    if (!isValid()) return;
 
-    const payload = {
-      full_name: fullName,
-      email: email,
-      seats: seats,
-      artist_id: '29c35f6a-55ff-4805-b3b9-3d3c682a5625', // Hardcoded for demo
-      event_date: '2026-06-15',
-      phone: '0000000000',
-    };
-
-    createBookingMutation.mutate(payload, {
-      onSuccess: (data) => {
-        Alert.alert(
-          "Success!",
-          `Booking confirmed! Code: ${data.code}`,
-          [{ 
-            text: "OK", 
-            onPress: () => {
-              queryClient.invalidateQueries({ queryKey: ['bookings'] });
-              reset(); 
-            }
-          }]
-        );
+    createBooking.mutate(
+      {
+        full_name: fullName,
+        email,
+        seats,
+        artist_id: undefined, // Backend will pick the first available artist
+        event_date: "2026-06-15",
+        phone: "0000000000",
       },
-      onError: (error) => {
-        Alert.alert("Error", "Could not complete your booking.");
+      {
+        onSuccess: (data) => {
+          Alert.alert(
+            "Booking confirmed",
+            `Your code: ${data.code}`,
+            [{ text: "OK", onPress: reset }]
+          );
+          queryClient.invalidateQueries({ queryKey: ["bookings"] });
+        },
+        onError: () => {
+          Alert.alert("Error", "Booking failed");
+        },
       }
-    });
+    );
   };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Reserve Your Spot</Text>
-      <Text style={styles.subtitle}>Secure your tickets for the Gnawa World Festival.</Text>
+      <Text style={styles.subtitle}>
+        reserve your tickets for the Gnawa World Festival
+      </Text>
 
       <Text style={styles.label}>Full Name</Text>
       <TextInput
         style={styles.input}
         value={fullName}
         onChangeText={setFullName}
-        placeholder="Enter your full name"
+        placeholder="Your name"
       />
 
       <Text style={styles.label}>Email</Text>
@@ -79,51 +93,45 @@ export default function BookingScreen() {
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
-        placeholder="Enter your email address"
+        placeholder="email@example.com"
       />
 
-      <Text style={styles.label}>Number of Seats (1-10)</Text>
+      <Text style={styles.label}>Number of Seats (1–10)</Text>
       <TextInput
         style={styles.input}
         value={String(seats)}
-        onChangeText={(text) => {
-          const num = parseInt(text.replace(/[^0-9]/g, '')) || 1;
-          if (num >= 1 && num <= 10) setSeats(num);
-        }}
         keyboardType="numeric"
-        placeholder="Minimum 1"
+        onChangeText={(v) => setSeats(Number(v) || 1)}
       />
 
       <View style={styles.checkboxContainer}>
-        <Checkbox
-          value={terms}
-          onValueChange={setTerms}
-          color={terms ? '#007BFF' : undefined}
-        />
-        <TouchableOpacity onPress={() => setTerms(!terms)}>
-          <Text style={styles.checkboxLabel}>I agree to the terms and conditions.</Text>
-        </TouchableOpacity>
+        <Checkbox value={terms} onValueChange={setTerms} />
+        <Text style={styles.checkboxLabel}>
+          I agree to the terms and conditions
+        </Text>
       </View>
 
-      <View style={styles.buttonWrapper}>
-        <TouchableOpacity
-          style={[styles.cta, !terms && styles.ctaDisabled]}
-          onPress={handleSubmit}
-          disabled={createBookingMutation.isPending || !terms}
-        >
-          <Text style={styles.ctaText}>{createBookingMutation.isPending ? 'Booking...' : 'Confirm Booking'}</Text>
-        </TouchableOpacity>
-        {createBookingMutation.isPending && <ActivityIndicator size="small" color="#fff" style={{marginTop:8}} />}
-      </View>
+      <TouchableOpacity
+        style={[styles.cta, (!terms || createBooking.isPending) && styles.ctaDisabled]}
+        onPress={handleBooking}
+        disabled={!terms || createBooking.isPending}
+      >
+        {createBooking.isPending ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.ctaText}>Confirm Booking</Text>
+        )}
+      </TouchableOpacity>
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
     padding: 20, 
-    backgroundColor: '#f9f9f9' 
+    backgroundColor: '#c9c8c8ff' 
   },
   title: { 
     fontSize: 28, 

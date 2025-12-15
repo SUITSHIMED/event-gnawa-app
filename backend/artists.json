@@ -1,1 +1,56 @@
-[{"id":"29c35f6a-55ff-4805-b3b9-3d3c682a5625","name":"Mâalem Mahmoud Guinia","bio":"Legendary Mâalem known for his dynamic performances.","photo_url":"https://placehold.co/150x150","schedule":"Friday, 8:00 PM","createdAt":"2025-12-13T18:34:48.395Z","updatedAt":"2025-12-13T18:34:48.395Z"},{"id":"d569b373-8d49-4732-87f0-c7fde2b7557d","name":"Mâalem Samira Kadiri","bio":"One of the few prominent female Mâalems.","photo_url":"https://placehold.co/150x150","schedule":"Saturday, 9:30 PM","createdAt":"2025-12-13T18:34:48.395Z","updatedAt":"2025-12-13T18:34:48.395Z"},{"id":"f6b337c3-22e8-4312-9ff1-423a67d975fa","name":"Mâalem Hamid El Kasri","bio":"Internationally acclaimed Gnawa artist famous for his powerful voice and collaborations with jazz musicians.","photo_url":"https://upload.wikimedia.org/wikipedia/commons/6/6c/Hamid_El_Kasri.jpg","schedule":"Friday, 10:00 PM","createdAt":"2025-12-14T02:07:06.000Z","updatedAt":"2025-12-14T02:07:06.000Z"},{"id":"c49bc187-6e78-4974-9b1c-56d948cf6435","name":"Mâalem Mustapha Baqbou","bio":"Legendary Gnawa master from Marrakech, blending deep spiritual chants with modern sounds.","photo_url":"https://upload.wikimedia.org/wikipedia/commons/2/2f/Mustapha_Baqbou.jpg","schedule":"Saturday, 7:30 PM","createdAt":"2025-12-14T02:07:06.029Z","updatedAt":"2025-12-14T02:07:06.029Z"},{"id":"1e68bc73-d0e5-492e-9c12-9b12d3874e55","name":"Mâalem Abdelkader Amlil","bio":"Renowned Gnawa performer known for traditional costumes and authentic stage performances.","photo_url":"https://upload.wikimedia.org/wikipedia/commons/8/8b/Gnawa_Musician.jpg","schedule":"Saturday, 9:00 PM","createdAt":"2025-12-14T02:07:06.036Z","updatedAt":"2025-12-14T02:07:06.036Z"},{"id":"46e17908-d2e1-4b9a-9129-1fba6c933db8","name":"Mâalem Mohamed Kouyou","bio":"Young Gnawa master representing the new generation while respecting ancient traditions.","photo_url":"https://upload.wikimedia.org/wikipedia/commons/4/4e/Gnawa_Festival_Essaouira.jpg","schedule":"Sunday, 6:30 PM","createdAt":"2025-12-14T02:07:06.044Z","updatedAt":"2025-12-14T02:07:06.044Z"}]
+[
+    {
+        "id": "29c35f6a-55ff-4805-b3b9-3d3c682a5625",
+        "name": "Mâalem Mahmoud Guinia",
+        "bio": "Legendary Mâalem known for his dynamic performances.",
+        "photo_url": "https://ik.imagekit.io/9yn2suj2g/guinea%20mo.jpg",
+        "schedule": "Friday, 8:00 PM",
+        "createdAt": "2025-12-13T18:34:48.395Z",
+        "updatedAt": "2025-12-13T18:34:48.395Z"
+    },
+    {
+        "id": "d569b373-8d49-4732-87f0-c7fde2b7557d",
+        "name": "Mâalem Samira Kadiri",
+        "bio": "One of the few prominent female Mâalems.",
+        "photo_url": "https://ik.imagekit.io/9yn2suj2g/Samira-Kadiri.jpg",
+        "schedule": "Saturday, 9:30 PM",
+        "createdAt": "2025-12-13T18:34:48.395Z",
+        "updatedAt": "2025-12-13T18:34:48.395Z"
+    },
+    {
+        "id": "f6b337c3-22e8-4312-9ff1-423a67d975fa",
+        "name": "Mâalem Hamid El Kasri",
+        "bio": "Internationally acclaimed Gnawa artist famous for his powerful voice and collaborations with jazz musicians.",
+        "photo_url": "https://ik.imagekit.io/9yn2suj2g/Hamid-Kasri.jpg",
+        "schedule": "Friday, 10:00 PM",
+        "createdAt": "2025-12-14T02:07:06.000Z",
+        "updatedAt": "2025-12-14T02:07:06.000Z"
+    },
+    {
+        "id": "c49bc187-6e78-4974-9b1c-56d948cf6435",
+        "name": "Mâalem Mustapha Baqbou",
+        "bio": "Legendary Gnawa master from Marrakech, blending deep spiritual chants with modern sounds.",
+        "photo_url": "https://ik.imagekit.io/9yn2suj2g/91103440-64106336.jpg",
+        "schedule": "Saturday, 7:30 PM",
+        "createdAt": "2025-12-14T02:07:06.029Z",
+        "updatedAt": "2025-12-14T02:07:06.029Z"
+    },
+    {
+        "id": "1e68bc73-d0e5-492e-9c12-9b12d3874e55",
+        "name": "Mâalem Abdelkader Amlil",
+        "bio": "Renowned Gnawa performer known for traditional costumes and authentic stage performances.",
+        "photo_url": "https://ik.imagekit.io/9yn2suj2g/images.jpg",
+        "schedule": "Saturday, 9:00 PM",
+        "createdAt": "2025-12-14T02:07:06.036Z",
+        "updatedAt": "2025-12-14T02:07:06.036Z"
+    },
+    {
+        "id": "46e17908-d2e1-4b9a-9129-1fba6c933db8",
+        "name": "Mâalem Mohamed Kouyou",
+        "bio": "Young Gnawa master representing the new generation while respecting ancient traditions.",
+        "photo_url": "https://ik.imagekit.io/9yn2suj2g/Maa%CC%82lem-Mohamed-Kouyou.jpg",
+        "schedule": "Sunday, 6:30 PM",
+        "createdAt": "2025-12-14T02:07:06.044Z",
+        "updatedAt": "2025-12-14T02:07:06.044Z"
+    }
+]

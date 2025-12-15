@@ -40,72 +40,88 @@ function ArtistImage({ uri }) {
   return <Image source={source} style={styles.photo} resizeMode="cover" onError={() => setFailed(true)} />;
 }
 const styles = StyleSheet.create({
-    container: { 
-      flex: 1, 
-      padding: 20, 
-      backgroundColor: '#fff' 
-    },
-    center: { 
-      flex: 1, 
-      justifyContent: 'center', 
-      alignItems: 'center' 
-    },
-    errorText: {
-      textAlign: 'center',
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: 'red',
-      marginTop: 50,
-    },
-    backButtonContainer: {
-        marginBottom: 20,
-        alignSelf: 'flex-start',
-    },
-    photo: {
-        width: '100%',
-        height: 250,
-        borderRadius: 10,
-        marginBottom: 15,
-    },
-    photoPlaceholder: {
-        width: '100%',
-        height: 250,
-        backgroundColor: '#eee',
-        borderRadius: 10,
-        marginBottom: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    photoPlaceholderText: {
-        color: '#999',
-        fontSize: 16,
-    },
-    name: { 
-      fontSize: 32, 
-      fontWeight: 'bold', 
-      color: '#333', 
-      marginBottom: 5 
-    },
-    schedule: { 
-      fontSize: 18, 
-      color: '#666', 
-      marginBottom: 20 
-    },
-    separator: { 
-      height: 1, 
-      backgroundColor: '#eee', 
-      marginBottom: 20 
-    },
-    bioTitle: { 
-      fontSize: 20, 
-      fontWeight: 'bold', 
-      marginTop: 5, 
-      marginBottom: 10,
-      color: '#333',
-    },
-    bioText: { 
-      fontSize: 16, 
-      lineHeight: 24, 
-      color: '#555'
-    },
+ 
+  container: { 
+    flex: 1, 
+    backgroundColor: '#121212'
+  },
+  contentContainer: {
+    paddingBottom: 40,
+  },
+  center: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center',
+    backgroundColor: '#121212'
+  },
+  
+  backButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+    marginTop: 20,
+    alignSelf: 'flex-start',
+  },
+  backButtonText: {
+    color: '#007BFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+
+  photoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  photo: {
+    width: 200,
+    height: 200,
+    borderRadius: 100, 
+    borderWidth: 4,
+    borderColor: '#007BFF', 
+    backgroundColor: '#333', 
+  },
+  
+  detailCard: {
+    paddingHorizontal: 20,
+  },
+  name: { 
+    fontSize: 34, 
+    fontWeight: '800', 
+    color: '#FFFFFF', 
+    textAlign: 'center',
+    marginBottom: 5,
+    marginTop: 10,
+  },
+  schedule: { 
+    fontSize: 18, 
+    color: '#007BFF', 
+    textAlign: 'center',
+    fontWeight: '600',
+    marginBottom: 20, 
+  },
+  separator: { 
+    height: 1, 
+    backgroundColor: '#333333', 
+    marginVertical: 20, 
+  },
+  bioTitle: { 
+    fontSize: 22, 
+    fontWeight: '700', 
+    marginBottom: 10,
+    color: '#E0E0E0', 
+  },
+  bioText: { 
+    fontSize: 16, 
+    lineHeight: 24, 
+    color: '#CCCCCC' 
+  },
+  
+  
+  errorText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FF6347',
+    marginTop: 50,
+  },
 });

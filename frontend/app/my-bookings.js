@@ -28,7 +28,7 @@ export default function BookingLookupScreen() {
                 contentContainerStyle={styles.container}
                 data={bookingsByEmail || []}
                 keyExtractor={(it) => String(it.id)}
-                ListHeaderComponent={() => (
+                ListHeaderComponent={ (
                     <View>
                         <Text style={styles.title}>My Reservations</Text>
                         <Text style={styles.subtitle}>Lookup by code or view all bookings for your email</Text>

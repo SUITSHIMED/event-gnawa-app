@@ -4,7 +4,7 @@ import { createBooking , getBookingByEmail, getBookingByCode } from "../controll
 const router = express.Router();
 
 router.post ("/", createBooking);
-router.get ("/:code", getBookingByCode);
+router.get ("/code/:code", getBookingByCode);
 router.get ("/email/:email", getBookingByEmail);
 
 export default router;

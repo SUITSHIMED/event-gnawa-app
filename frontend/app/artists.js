@@ -1,54 +1,109 @@
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, StyleSheet, Image } from "react-native";
-import { useState } from 'react';
-import Placeholder from '../assets/images/partial-react-logo.png';
-import { useArtists } from "../src/services/artistService"; 
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+} from "react-native";
 import { useRouter } from "expo-router";
+import { useArtists } from "../src/services/artistService";
+import Placeholder from "../assets/images/partial-react-logo.png";
 
 export default function ArtistsListScreen() {
-  const { data: artists, isLoading, isError, refetch, isFetching } = useArtists();
   const router = useRouter();
+  const { data: artists, isLoading, isError, refetch, isFetching } = useArtists();
 
-  if (isLoading) return <ActivityIndicator size="large" style={styles.center} />;
-  
+  // 1️⃣ Loading
+  if (isLoading) {
+    return <ActivityIndicator size="large" style={styles.center} />;
+  }
+
+  // 2️⃣ Error
   if (isError || !artists) {
-    return <Text style={styles.centerText}>Error loading artists.</Text>;
+    return <Text style={styles.errorText}>Error loading artists</Text>;
   }
 
-  const placeholder = Placeholder;
+  // 3️⃣ One artist card
+  const renderArtist = ({ item }) => (
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => router.push(`/artist/${item.id}`)}
+    >
+      <Image
+        source={item.photo_url ? { uri: item.photo_url } : Placeholder}
+        style={styles.avatar}
+      />
 
-  function ArtistRow({ item }) {
-    const [failed, setFailed] = useState(false);
-    const source = !failed && item.photo_url ? { uri: item.photo_url } : placeholder;
-    return (
-      <TouchableOpacity
-        style={styles.itemContainer}
-        onPress={() => router.push(`/artist/${item.id}`)}
-      >
-        <Image source={source} style={styles.avatar} resizeMode="cover" onError={() => setFailed(true)} />
-        <View style={styles.meta}>
-          <Text style={styles.nameText}>{item.name}</Text>
-          <Text style={styles.scheduleText}>{item.schedule}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
+      <View style={styles.meta}>
+        <Text style={styles.nameText}>{item.name}</Text>
+        <Text style={styles.scheduleText}>{item.schedule}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 
+  // 4️⃣ List
   return (
     <FlatList
-      contentContainerStyle={styles.list}
       data={artists}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item) => item.id}
+      renderItem={renderArtist}
+      contentContainerStyle={styles.list}
       onRefresh={refetch}
       refreshing={isFetching}
-      renderItem={({ item }) => <ArtistRow item={item} />}
     />
   );
 }
+
 const styles = StyleSheet.create({
-  list: { padding: 12 },
-  itemContainer: { flexDirection: 'row', alignItems: 'center', padding: 12, backgroundColor: '#fff', marginBottom: 10, borderRadius: 8, elevation: 2 },
-  avatar: { width: 64, height: 64, borderRadius: 8, marginRight: 12, backgroundColor: '#eee' },
-  meta: { flex: 1 },
-  nameText: { fontSize: 18, fontWeight: '600' },
-  scheduleText: { color: '#666', marginTop: 4 }
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  list: {
+    padding: 16,
+  },
+
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#1E1E1E",
+    padding: 14,
+    marginBottom: 12,
+    borderRadius: 12,
+  },
+
+  avatar: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    marginRight: 15,
+    backgroundColor: "#333",
+  },
+
+  meta: {
+    flex: 1,
+  },
+
+  nameText: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#FFF",
+  },
+
+  scheduleText: {
+    marginTop: 4,
+    fontSize: 14,
+    color: "#BBB",
+  },
+
+  errorText: {
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 40,
+    color: "red",
+  },
 });
