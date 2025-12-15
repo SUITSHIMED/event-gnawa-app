@@ -5,7 +5,6 @@ export const createBooking = async (req, res) => {
         let { full_name, email, event_date, artist_id, seats, phone } = req.body;
         const code = randomUUID().slice(0, 6).toUpperCase();
 
-        // If artist_id not provided, use first available artist
         if (!artist_id) {
             const firstArtist = await Artist.findOne();
             if (!firstArtist) {
@@ -20,10 +19,8 @@ export const createBooking = async (req, res) => {
         
         res.status(201).json(newBooking);
     } catch (err) {
-        // ⚠️ IMPROVED ERROR HANDLING: Log the Sequelize error and return detail
         console.error("Booking creation failed:", err); 
         
-        // Check for specific validation errors (e.g., missing field)
         if (err.name === 'SequelizeValidationError') {
             return res.status(400).json({ 
                 error: "Validation failed. Please ensure all required fields are correct.", 
@@ -31,7 +28,6 @@ export const createBooking = async (req, res) => {
             });
         }
         
-        // Default Server Error
         res.status(500).json({ error: "Internal Server Error. Cannot create booking." });
     }
 };
